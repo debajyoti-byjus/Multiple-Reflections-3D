@@ -22,65 +22,39 @@
 
 <body>
     <div class="slidecontainer">
-        <input type="range" min="0" max="1.4" value="0.6" step="0.001" class="slider" id="myRange">
+        <input type="range" min="0.3926991" max="1.57" value="0.6" step="0.001" class="slider" id="myRange">
         <!-- max="1.57" -->
     </div>
-    <input type="checkbox" id="planeToggle" name="planebox1" checked>
-    <input type="checkbox" id="normalToggle" name="normalbox1" checked>
 
-    <div id="labelplaneid">Show/Hide<br>Plane</div>
-    <div id="labelnormalid">Normal<br>& Angles</div>
+    <div class="slidecontainer2">
+        <input type="range" min="-0.22" max="0.22" value="0.00" step="0.01" class="slider2" id="myRange2">
+    </div>
+
+    <div class="flexClassButtons">
+        <div class="angleselector" id="btnid1">180&deg;</div>
+        <div class="angleselector" id="btnid2">120&deg;</div>
+        <div class="angleselector" id="btnid3">90&deg;</div>
+        <div class="angleselector" id="btnid4">72&deg;</div>
+        <div class="angleselector" id="btnid5">60&deg;</div>
+        <div class="angleselector" id="btnid6">45&deg;</div>
+    </div>
+
+
+
     <div id="anglelabelid"></div>
     <canvas class="webgl"></canvas>
 
-    <div class="tutorialPopup" id="tutorial1">Drag👆 the slider to change the incident angle🔦</div>
     <div class="nextClass" id="NextBtn">NEXT</div>
 
-    <div class="questionContainer" id="question1Containerid">
-        <div class="questionText" id="question1Text">What did you observe just now? <br> <br></div>
-        <div class="optionsText" id="options1Text">&angle;i &lt; &angle;r </div>
-        <div class="optionsText" id="options2Text">&angle;i = &angle;r </div>
-        <div class="optionsText" id="options3Text">&angle;i &gt; &angle;r </div>
-        <div id="AnswerDivid"></div>
-    </div>
-
-    <div class="tutorialPopup" id="law1">
-        <h3>First Law of Reflection States:</h1>
-            <br>
-            <h5>The angle of incidence ( ∠i ) is always equal to the angle of reflection ( ∠r ).
-        </h3>
-    </div>
-
-    <div class="questionContainer" id="question2Containerid">
-        <div class="questionText" id="question21Text">Does the incident ray, reflected ray and normal to the mirror, lie
-            on the same place?<br> <br></div>
-        <div class="optionsText" id="options21Text">Yes</div>
-        <div class="optionsText" id="options22Text">No</div>
-        <!-- <div class="optionsText" id="options23Text">Maybe</div> -->
-        <div id="AnswerDivid2"></div>
-    </div>
 
 
-    <div class="tutorialPopup" id="law2">
-        <h3>Second Law of Reflection States:</h1>
-            <br>
-            <h5>The incident ray, the normal to the mirror at the point of incidence and the reflected ray, all lie in
-                the same plane.
-        </h3>
-    </div>
-    <div class="tutorialPopup" id="tutorial2">
-        <h2 class="closeButtonModal" id="idtut2close">&times;</h2>
-        <h4>Swipe👆 on the screen to rotate and visualize the scene in 3D.</h4>
-        <br>
-        <h5>Click on the checkbox ✅ to view/hide the plane.</h5>
-    </div>
 
     <div class="nextClass" id="finish">FINISH</div>
 
     <img src="./assets/pointer.png" id="pointerPng" style="width:48px;height:48px;">
 
 
-    <script type="module" src="./script.js"></script>
+    <script type="module" src="./temp.js"></script>
     <script src="./js/gsap.min.js"></script>
 </body>
 

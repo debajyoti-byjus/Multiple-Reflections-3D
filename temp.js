@@ -3,56 +3,29 @@ import * as THREE from "./js/three.module.js";
 import { GLTFLoader } from './js/GLTFLoader.js';
 import { OrbitControls } from './js/OrbitControls.js';
 import { Reflector } from './js/Reflector.js';
-import { CSS2DRenderer, CSS2DObject } from './js/CSS2DRenderer.js';
-
-
-
-
-//camera controls
-// import { CameraControls } from './js/CameraControls.js';
-// CameraControls.install({ THREE: THREE });
-
-
-// import { EffectComposer } from './js/EffectComposer.js';
-// import { RenderPass } from './js/RenderPass.js';
-// import { InfiniteGridHelper } from "./js/InfiniteGridHelper.js";
-
-// -------------------import from CDN -------------------------
-// import * as THREE from 'https://cdn.skypack.dev/three@0.129.0/build/three.module.js';
-// import { OrbitControls } from 'https://cdn.skypack.dev/three@0.129.0/examples/jsm/controls/OrbitControls.js';
-// import { GLTFLoader } from 'https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js';
 
 
 const canvas = document.querySelector('.webgl');
 const scene = new THREE.Scene();
-// this._composer = new EffectComposer(._threejs);
+
 
 let raylength = 4, m = 1, n = 1, radiusRatio = 0.6;
-// let arrow1Radius = 1, arrow2Radius = 1.1, beamCentreRadius = 1, laserPointerRadius = 4;
 let arrow1Radius = 2, arrow2Radius = 2.2, beamCentreRadius = 2, laserPointerRadius = 5.25, normalOpacity = 1, planeOpacity = 0.5, angleArcOpacity = 1;
 let sceneShiftX = 0;
 let root1, root2, root3, footballModel, greenCuttingBoard, arrowModel2, arrowModel, normalDottedModel, scaleval = 0.8;
 let roughness0 = 0, transmission1 = 0.9, thick1 = 0;
 
-//TUTORIAL State Variables
-let isSliderClicked = 0, tutorialStage = -1, sliderLeftScanned = 0, sliderRightScanned = 0;
 
-//Variable description
-/**
- * tutorialStage--
- * = 0 then its label showing stage
- * = 1, then intial popup to drag slider is visible.
- * = 2, then next button is clicked, and question is visible
- */
 
-let root1Material;
 // loading
 const loader = new GLTFLoader();
-//-------------LASER Pointer ----------------
+// ----------------------------------------------------------------------------------------------------------------
+//---------------------------------------------Football------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------
 loader.load("./assets/3D models glb/football.glb", function (glb) {
     footballModel = glb.scene;
-    footballModel.position.set(laserPointerRadius + sceneShiftX, 0, 0);
-    footballModel.scale.set(0.003, 0.003, 0.003);
+    footballModel.position.set(1.2 + sceneShiftX, 0, 0);
+    footballModel.scale.set(0.0004, 0.0004, 0.0004);
     footballModel.rotation.set(0, 0, 0);
     // footballModel.children[0].material = new THREE.MeshPhongMaterial({ color: 'red' });
     footballModel.children[0].castShadow = true;
@@ -65,7 +38,9 @@ loader.load("./assets/3D models glb/football.glb", function (glb) {
     console.log(`An error occured`);
 });
 
-//-------------Green Cutting Board----------------
+// ----------------------------------------------------------------------------------------------------------------
+//---------------------------------------------Green Board---------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------
 loader.load("./assets/3D models glb/greenBoardFinal.glb", function (glb) {
     greenCuttingBoard = glb.scene;
     greenCuttingBoard.position.set(3 + sceneShiftX, -2, 0);
@@ -81,75 +56,120 @@ loader.load("./assets/3D models glb/greenBoardFinal.glb", function (glb) {
     console.log(`An error occured`);
 });
 
-// //----------------NORMAL dotted -----------------------
-// function drawNormal() {
-//     loader.load("./assets/3D models glb/normal-dotted.glb", function (glb) {
-//         normalDottedModel = glb.scene;
-//         normalDottedModel.position.set(0 + sceneShiftX, 0, 0);
-//         normalDottedModel.scale.set(0.1, 0.08, 0.1);
-//         normalDottedModel.rotation.set(0, 0, -Math.PI / 2);
-//         // normalDottedModel.children[0].material = nnew THREE.MeshBasicMaterial({ color: "grey", opacity: normalOpacity, transparent: true })
-//         scene.add(normalDottedModel);
-//     }, function (xhr) {
-//         console.log((xhr.loaded / xhr.total * 100) + "%loaded");
-//     }, function (error) {
-//         console.log(`An error occured`);
-//     });
-// }
-// function destroyNormal() {
-//     scene.remove(normalDottedModel);
-// }
-// drawNormal();
-
-//-------------Mirror----------------
+// ----------------------------------------------------------------------------------------------------------------
+//---------------------------------------------Mirror---------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------
 const geometry = new THREE.PlaneGeometry(1, 1);
-
-
-const material = new THREE.MeshPhysicalMaterial({
-    reflectivity: 1.0,
-    transmission: 1,
-    roughness: 0,
-    metalness: 0,
-    clearcoat: 0.0,
-    clearcoatRoughness: 0,
-    color: new THREE.Color("#222222"),
-    ior: 1.5,
-});
+// const material = new THREE.MeshPhysicalMaterial({
+//     reflectivity: 1.0,
+//     transmission: 1,
+//     roughness: 0,
+//     metalness: 0,
+//     clearcoat: 0.0,
+//     clearcoatRoughness: 0,
+//     color: new THREE.Color("#222222"),
+//     ior: 1.5,
+// });
 // const plane = new THREE.Mesh(geometry, material);
 let plane = new Reflector(geometry, {
     clipBias: 0,
     textureWidth: window.innerWidth * window.devicePixelRatio,
     textureHeight: window.innerHeight * window.devicePixelRatio,
-    color: 0x777777
+    color: 0x777777,
 });
-
-plane.scale.set(3, 7, 1);
+plane.scale.set(3, 2.9, 1); //3,7,1
 plane.rotation.set(Math.PI / 2, Math.PI / 2, 0);
 plane.position.set(0 + sceneShiftX, 0.1, 0);
 scene.add(plane);
+
 
 let plane_2 = new Reflector(geometry, {
     clipBias: 0,
     textureWidth: window.innerWidth * window.devicePixelRatio,
     textureHeight: window.innerHeight * window.devicePixelRatio,
-    color: 0x777777
+    color: 0x777777,
 });
 
-plane_2.scale.set(3, 7, 1);
-plane_2.rotation.set(0, 0, 0);
-plane_2.position.set(0 + sceneShiftX, 0.1, 0);
+plane_2.scale.set(3, 2.9, 1);
+// plane_2.rotation.set(0, 0, 0);
+plane_2.position.set(1.5 + sceneShiftX, 0.1, 0);
 scene.add(plane_2);
 
 
 
 
-//----------------------------Mirror Cube------------------------
-let geometry1 = new THREE.BoxGeometry(0.05, 3.3, 7.1);
-let material1 = new THREE.MeshLambertMaterial({ color: "#ffffff" });
 
-let mirrorBack = new THREE.Mesh(geometry1, material1);
-mirrorBack.position.set(-0.03 + sceneShiftX, 0.04, 0)
-scene.add(mirrorBack);
+let plane_3 = new Reflector(geometry, {
+    clipBias: 0,
+    textureWidth: window.innerWidth * window.devicePixelRatio,
+    textureHeight: window.innerHeight * window.devicePixelRatio,
+    color: 0x777777,
+});
+plane_3.scale.set(3, 2.9, 1); //3,7,1
+plane_3.rotation.set(Math.PI / 2, Math.PI / 2, 0);
+plane_3.position.set(0 + sceneShiftX, 0.1, 0);
+scene.add(plane_3);
+
+
+let plane_4 = new Reflector(geometry, {
+    clipBias: 0,
+    textureWidth: window.innerWidth * window.devicePixelRatio,
+    textureHeight: window.innerHeight * window.devicePixelRatio,
+    color: 0x777777,
+});
+
+plane_4.scale.set(3, 2.9, 1);
+// plane_4.rotation.set(0, 0, 0);
+plane_4.position.set(1.5 + sceneShiftX, 0.1, 0);
+scene.add(plane_4);
+
+
+
+
+
+let geometry_mirror_back = new THREE.BoxGeometry(3.1, 3.1, 0.05);
+let material_mirror_back = new THREE.MeshLambertMaterial({ color: "#333333" });
+
+let plane_left = new THREE.Mesh(geometry_mirror_back, material_mirror_back);
+// plane_left.scale.set(3, 7, 1); //3,7,1
+plane_left.rotation.set(Math.PI / 2, 0, 0);
+plane_left.position.set(0 + sceneShiftX, 0.1, 0);
+scene.add(plane_left);
+
+
+let plane_right = new THREE.Mesh(geometry_mirror_back, material_mirror_back);
+// plane_right.scale.set(3, 7, 1); //3,7,1
+plane_right.rotation.set(Math.PI / 2, 0, 0);
+plane_right.position.set(0 + sceneShiftX, 0.1, 0);
+scene.add(plane_right);
+
+// let plane_right = new Reflector(geometry_mirror_back, material_mirror_back);
+// plane_right.scale.set(3, 3, 3);
+// plane_left.rotation.set(Math.PI / 2, Math.PI / 2, 0);
+// plane_right.position.set(1.5 + sceneShiftX, 0.1, 0);
+// scene.add(plane_right);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// //----------------------------Mirror Cube------------------------
+// let geometry1 = new THREE.BoxGeometry(0.05, 3, 6.1);
+// let material1 = new THREE.MeshLambertMaterial({ color: "#333333" });
+
+// let mirrorBack = new THREE.Mesh(geometry1, material1);
+// mirrorBack.position.set(-0.03 + sceneShiftX, 0.04, 0)
+// scene.add(mirrorBack);
 //----------------------------Mirror Cube Ends------------------------
 
 
@@ -209,22 +229,46 @@ scene.add(mirrorBack);
 // scene.add(arc2);
 
 //-------LASER position wrt slider --------------
+let lateralShift;
 function laserPointer() {
-
     // arrow1Radius = 1, arrow2Radius = 1.1, beamCentreRadius = 1, laserPointerRadius = 4;
 
-    //takes the slider value and rotates/repositions the pointer
+    //takes the slider value and rotates/repositionsmyRange2 the pointer
     let sliderval = document.getElementById("myRange").value;
-    let x, z, theta;
-    theta = sliderval;
-    x = laserPointerRadius * Math.cos(theta);
-    z = laserPointerRadius * Math.sin(theta);
+    lateralShift = document.getElementById("myRange2").value;
 
-    footballModel.position.set(x + sceneShiftX, 0, z);
+    let x, z, theta, mirrorRadius = 1.5;
+    theta = sliderval;
+    x = mirrorRadius * Math.cos(theta);
+    z = mirrorRadius * Math.sin(theta);
+
+    footballModel.position.set(1.2 + sceneShiftX, 0, -lateralShift);
     // testObject22.position.set(x + sceneShiftX, 0, z);
-    footballModel.rotation.set(0, -theta, 0);
-    // let xLaserStart = beamCentreRadius * Math.cos(theta);
-    // let zLaserStart = beamCentreRadius * Math.sin(theta);
+    plane.rotation.set(0, theta, 0);
+    plane_2.rotation.set(0, -theta + Math.PI, 0);
+
+    plane_3.rotation.set(0, theta, 0);
+    plane_4.rotation.set(0, -theta + Math.PI, 0);
+
+    plane_left.rotation.set(0, theta, 0);
+    plane_right.rotation.set(0, -theta + Math.PI, 0);
+
+
+    // footballModel.rotation.set(0, -theta, 0);
+
+    console.log("rotated?")
+
+    let xLaserStart = mirrorRadius * Math.cos(theta);
+    let zLaserStart = mirrorRadius * Math.sin(theta);
+
+    plane.position.set(xLaserStart + sceneShiftX, 0, -zLaserStart);
+    plane_2.position.set(xLaserStart + sceneShiftX, 0, +zLaserStart);
+
+    plane_3.position.set(xLaserStart + sceneShiftX, 0, -zLaserStart);
+    plane_4.position.set(xLaserStart + sceneShiftX, 0, +zLaserStart);
+
+    plane_left.position.set(xLaserStart + sceneShiftX - 0.1, -0.05, -zLaserStart - 0.01);
+    plane_right.position.set(xLaserStart + sceneShiftX - 0.1, -0.05, +zLaserStart + 0.01);
 
     // let xArrow = arrow1Radius * Math.cos(theta);
     // let zArrow = arrow1Radius * Math.sin(theta);
@@ -256,7 +300,7 @@ function laserPointer() {
     //     //create arcs here
     //     createArcs();
     // }
-    let angleOfIncidence = theta * 180.0 / Math.PI;
+    let angleOfIncidence = 180 - (1 - (theta * 180.0 / Math.PI) / 90) * 180;
     document.getElementById("anglelabelid").innerHTML = "i = " + Math.round(angleOfIncidence).toString() + " &deg;";
 }
 
@@ -272,7 +316,7 @@ camera.position.set(0, 12, 0);
 scene.add(camera);
 const renderer = new THREE.WebGL1Renderer({
     canvas: canvas,
-    antialias: true,
+    antialias: false,
 });
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap; // default THREE.PCFShadowMap
@@ -282,9 +326,9 @@ renderer.shadowMap.type = THREE.PCFSoftShadowMap; // default THREE.PCFShadowMap
 // camera.layers.enableAll();
 // // camera.layers.toggle(1);
 
-// // const axesHelper = new THREE.AxesHelper(7);
-// // axesHelper.layers.enableAll();
-// // scene.add(axesHelper);
+// const axesHelper = new THREE.AxesHelper(7);
+// axesHelper.layers.enableAll();
+// scene.add(axesHelper);
 
 // const mirrorDiv = document.createElement('div');
 // mirrorDiv.className = 'label';
@@ -455,7 +499,7 @@ renderer.shadowMap.type = THREE.PCFSoftShadowMap; // default THREE.PCFShadowMap
 //LIGHTING
 //DIR LIGHTING
 let dirLight1 = new THREE.DirectionalLight(0xffffff, 3);
-dirLight1.position.set(10 + sceneShiftX, 6, 0);
+dirLight1.position.set(sceneShiftX + 1, 10, 0);
 dirLight1.castShadow = true;
 dirLight1.layers.enableAll(); //so t
 scene.add(dirLight1);
@@ -477,8 +521,8 @@ renderer.outputEncoding = THREE.sRGBEncoding;
 document.body.appendChild(canvas);
 renderer.setClearColor("#333333"); // whi/te background - replace ffffff with any hex color
 
-// const helper = new THREE.CameraHelper( light.shadow.camera );
-// scene.add( helper );
+// const helper = new THREE.CameraHelper(dirLight1.shadow.camera);
+// scene.add(helper);
 
 //Orbit controlls
 const controls = new OrbitControls(camera, renderer.domElement);
@@ -494,7 +538,7 @@ renderer.render(scene, camera);
 
 
 
-// let timeVar = 1;
+let timeVar = 1;
 function animate() {
     /*****WARNING********/
     //This animate function starts before the models are even loaded and casuses errors
@@ -505,10 +549,10 @@ function animate() {
     // console.log(footballModel.rotation.x);
     renderer.render(scene, camera);
     // labelRenderer.render(scene, camera);
-    // timeVar++;
-    // if (timeVar == 30) { //ERROR MAY OCCUR HERE TOO
-    //     laserPointer();
-    // }
+    timeVar++;
+    if (timeVar == 30) { //ERROR MAY OCCUR HERE TOO
+        laserPointer();
+    }
 
     // console.log(camera.position);
     // console.log(camera.getWorldPosition());
@@ -522,22 +566,38 @@ function animate() {
 };
 animate(); // this gets called before the model gets loaded.
 
-// document.getElementById("myRange").oninput = function () {
+document.getElementById("myRange").oninput = function () {
+    laserPointer();
+}
 
-//     if (tutorialStage == 1) {
-//         isSliderClicked = 1;
-//         document.getElementById("tutorial1").style.display = "none";
-//     }
-//     if (isSliderClicked == 1 && document.getElementById("myRange").value <= 0.4) {
-//         sliderLeftScanned = 1;
-//     }
-//     if (isSliderClicked == 1 && document.getElementById("myRange").value >= 1.0) {
-//         sliderRightScanned = 1;
-//     }
-//     laserPointer();
-// }
+document.getElementById("myRange2").oninput = function () {
+    laserPointer();
+}
 
-
+document.getElementById("btnid1").onclick = function () {
+    document.getElementById("myRange").value = 1.570796327;
+    laserPointer();
+}
+document.getElementById("btnid2").onclick = function () {
+    document.getElementById("myRange").value = 1.047197551;
+    laserPointer();
+}
+document.getElementById("btnid3").onclick = function () {
+    document.getElementById("myRange").value = 0.7853981634;
+    laserPointer();
+}
+document.getElementById("btnid4").onclick = function () {
+    document.getElementById("myRange").value = 0.6283185307;
+    laserPointer();
+}
+document.getElementById("btnid5").onclick = function () {
+    document.getElementById("myRange").value = 0.5235987756;
+    laserPointer();
+}
+document.getElementById("btnid6").onclick = function () {
+    document.getElementById("myRange").value = 0.3926990817;
+    laserPointer();
+}
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));

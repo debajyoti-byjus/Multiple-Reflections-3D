@@ -101,7 +101,8 @@
     color: rgb(76, 0, 28);
     border-radius: 0.5rem;
     font-size: 2rem;
-    padding: 1rem;
+    padding: 1rem 1rem;
+    padding-top: 2rem;
     width: 4rem;
     height: 4rem;
     margin: 1rem;

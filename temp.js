@@ -99,29 +99,29 @@ scene.add(plane_2);
 
 
 
-// let plane_3 = new Reflector(geometry, {
-//     clipBias: 0,
-//     textureWidth: window.innerWidth * window.devicePixelRatio,
-//     textureHeight: window.innerHeight * window.devicePixelRatio,
-//     color: 0x777777,
-// });
-// plane_3.scale.set(3, 2.9, 1); //3,7,1
-// plane_3.rotation.set(Math.PI / 2, Math.PI / 2, 0);
-// plane_3.position.set(0 + sceneShiftX, 0.1, 0);
-// scene.add(plane_3);
+let plane_3 = new Reflector(geometry, {
+    clipBias: 0,
+    textureWidth: window.innerWidth * window.devicePixelRatio,
+    textureHeight: window.innerHeight * window.devicePixelRatio,
+    color: 0x777777,
+});
+plane_3.scale.set(3, 2.9, 1); //3,7,1
+plane_3.rotation.set(Math.PI / 2, Math.PI / 2, 0);
+plane_3.position.set(0 + sceneShiftX, 0.1, 0);
+scene.add(plane_3);
 
 
-// let plane_4 = new Reflector(geometry, {
-//     clipBias: 0,
-//     textureWidth: window.innerWidth * window.devicePixelRatio,
-//     textureHeight: window.innerHeight * window.devicePixelRatio,
-//     color: 0x777777,
-// });
+let plane_4 = new Reflector(geometry, {
+    clipBias: 0,
+    textureWidth: window.innerWidth * window.devicePixelRatio,
+    textureHeight: window.innerHeight * window.devicePixelRatio,
+    color: 0x777777,
+});
 
-// plane_4.scale.set(3, 2.9, 1);
-// // plane_4.rotation.set(0, 0, 0);
-// plane_4.position.set(1.5 + sceneShiftX, 0.1, 0);
-// scene.add(plane_4);
+plane_4.scale.set(3, 2.9, 1);
+// plane_4.rotation.set(0, 0, 0);
+plane_4.position.set(1.5 + sceneShiftX, 0.1, 0);
+scene.add(plane_4);
 
 
 
@@ -172,8 +172,8 @@ function laserPointer() {
     plane.rotation.set(0, theta, 0);
     plane_2.rotation.set(0, -theta + Math.PI, 0);
 
-    // plane_3.rotation.set(0, theta, 0);
-    // plane_4.rotation.set(0, -theta + Math.PI, 0);
+    plane_3.rotation.set(0, theta, 0);
+    plane_4.rotation.set(0, -theta + Math.PI, 0);
 
     plane_left.rotation.set(0, theta, 0);
     plane_right.rotation.set(0, -theta + Math.PI, 0);
@@ -189,8 +189,8 @@ function laserPointer() {
     plane.position.set(xLaserStart + sceneShiftX, 0, -zLaserStart);
     plane_2.position.set(xLaserStart + sceneShiftX, 0, +zLaserStart);
 
-    // plane_3.position.set(xLaserStart + sceneShiftX, 0, -zLaserStart);
-    // plane_4.position.set(xLaserStart + sceneShiftX, 0, +zLaserStart);
+    plane_3.position.set(xLaserStart + sceneShiftX, 0, -zLaserStart);
+    plane_4.position.set(xLaserStart + sceneShiftX, 0, +zLaserStart);
 
     plane_left.position.set(xLaserStart + sceneShiftX - 0.1, -0.05, -zLaserStart - 0.01);
     plane_right.position.set(xLaserStart + sceneShiftX - 0.1, -0.05, +zLaserStart + 0.01);
@@ -454,9 +454,9 @@ const controls = new OrbitControls(camera, renderer.domElement);
 // const controls = new OrbitControls(camera, labelRenderer.domElement);   //for labels
 // controls.minAzimuthAngle = -2;
 // controls.maxAzimuthAngle = 2;
-// controls.maxPolarAngle = 1.6;
-// controls.maxDistance = 10;
-// controls.minDistance = 6;
+controls.maxPolarAngle = 1.6;
+controls.maxDistance = 8;
+controls.minDistance = 4;
 // const cameraControls = new CameraControls(camera, renderer.domElement);
 // CameraControls.rotateTo(0, 0, enableTransition);
 renderer.render(scene, camera);

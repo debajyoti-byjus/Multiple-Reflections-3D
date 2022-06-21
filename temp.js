@@ -41,7 +41,7 @@ loader.load("./assets/3D models glb/football.glb", function (glb) {
 // ----------------------------------------------------------------------------------------------------------------
 //---------------------------------------------Green Board---------------------------------------------------------
 // ----------------------------------------------------------------------------------------------------------------
-loader.load("./assets/3D models glb/greenBoardFinal.glb", function (glb) {
+loader.load("./assets/3D models glb/green board-media.glb", function (glb) {
     greenCuttingBoard = glb.scene;
     greenCuttingBoard.position.set(3 + sceneShiftX, -2, 0);
     greenCuttingBoard.scale.set(6.5, 6.5, 6.5);
@@ -423,7 +423,7 @@ renderer.shadowMap.type = THREE.PCFSoftShadowMap; // default THREE.PCFShadowMap
 
 //LIGHTING
 //DIR LIGHTING
-let dirLight1 = new THREE.DirectionalLight(0xffffff, 3);
+let dirLight1 = new THREE.DirectionalLight(0xffffff, 1);
 dirLight1.position.set(sceneShiftX + 1, 10, 0);
 dirLight1.castShadow = true;
 dirLight1.layers.enableAll(); //so t
@@ -444,7 +444,7 @@ renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 0.4;
 renderer.outputEncoding = THREE.sRGBEncoding;
 document.body.appendChild(canvas);
-renderer.setClearColor("#333333"); // whi/te background - replace ffffff with any hex color
+renderer.setClearColor("#aaaaaa"); // whi/te background - replace ffffff with any hex color
 
 // const helper = new THREE.CameraHelper(dirLight1.shadow.camera);
 // scene.add(helper);

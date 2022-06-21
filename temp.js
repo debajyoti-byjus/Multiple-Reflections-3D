@@ -444,7 +444,7 @@ renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 0.4;
 renderer.outputEncoding = THREE.sRGBEncoding;
 document.body.appendChild(canvas);
-renderer.setClearColor("#aaaaaa"); // whi/te background - replace ffffff with any hex color
+renderer.setClearColor("#ffffff"); // whi/te background - replace ffffff with any hex color
 
 // const helper = new THREE.CameraHelper(dirLight1.shadow.camera);
 // scene.add(helper);

@@ -99,29 +99,29 @@ scene.add(plane_2);
 
 
 
-let plane_3 = new Reflector(geometry, {
-    clipBias: 0,
-    textureWidth: window.innerWidth * window.devicePixelRatio,
-    textureHeight: window.innerHeight * window.devicePixelRatio,
-    color: 0x777777,
-});
-plane_3.scale.set(3, 2.9, 1); //3,7,1
-plane_3.rotation.set(Math.PI / 2, Math.PI / 2, 0);
-plane_3.position.set(0 + sceneShiftX, 0.1, 0);
-scene.add(plane_3);
+// let plane_3 = new Reflector(geometry, {
+//     clipBias: 0,
+//     textureWidth: window.innerWidth * window.devicePixelRatio,
+//     textureHeight: window.innerHeight * window.devicePixelRatio,
+//     color: 0x777777,
+// });
+// plane_3.scale.set(3, 2.9, 1); //3,7,1
+// plane_3.rotation.set(Math.PI / 2, Math.PI / 2, 0);
+// plane_3.position.set(0 + sceneShiftX, 0.1, 0);
+// scene.add(plane_3);
 
 
-let plane_4 = new Reflector(geometry, {
-    clipBias: 0,
-    textureWidth: window.innerWidth * window.devicePixelRatio,
-    textureHeight: window.innerHeight * window.devicePixelRatio,
-    color: 0x777777,
-});
+// let plane_4 = new Reflector(geometry, {
+//     clipBias: 0,
+//     textureWidth: window.innerWidth * window.devicePixelRatio,
+//     textureHeight: window.innerHeight * window.devicePixelRatio,
+//     color: 0x777777,
+// });
 
-plane_4.scale.set(3, 2.9, 1);
-// plane_4.rotation.set(0, 0, 0);
-plane_4.position.set(1.5 + sceneShiftX, 0.1, 0);
-scene.add(plane_4);
+// plane_4.scale.set(3, 2.9, 1);
+// // plane_4.rotation.set(0, 0, 0);
+// plane_4.position.set(1.5 + sceneShiftX, 0.1, 0);
+// scene.add(plane_4);
 
 
 
@@ -153,81 +153,6 @@ scene.add(plane_right);
 
 
 
-
-
-
-
-
-
-
-
-
-
-// //----------------------------Mirror Cube------------------------
-// let geometry1 = new THREE.BoxGeometry(0.05, 3, 6.1);
-// let material1 = new THREE.MeshLambertMaterial({ color: "#333333" });
-
-// let mirrorBack = new THREE.Mesh(geometry1, material1);
-// mirrorBack.position.set(-0.03 + sceneShiftX, 0.04, 0)
-// scene.add(mirrorBack);
-//----------------------------Mirror Cube Ends------------------------
-
-
-// //----------Creating the transparent plane of reflection-------------
-// const geometryPlane = new THREE.PlaneGeometry(1, 1);
-// const materialPlane = new THREE.MeshPhongMaterial({ color: "#555555", side: THREE.DoubleSide, opacity: planeOpacity, transparent: true });
-// let reflectionPlane = new THREE.Mesh(geometryPlane, materialPlane);
-// reflectionPlane.scale.set(3, 5, 1);
-// reflectionPlane.rotation.set(Math.PI / 2, 0, 0);
-// reflectionPlane.position.set(1.5 + sceneShiftX, 0, 0);
-// scene.add(reflectionPlane);
-
-
-
-
-// //Test object -  it lies in the centre of the mirrow where the two rays meet(for making a seamless contact)
-// const geometry2 = new THREE.SphereGeometry(.04, 20, 20);
-// const material2 = new THREE.MeshPhongMaterial({ color: 0x000000, emissive: 0xff0000, shininess: 0 });
-// let testObject = new THREE.Mesh(geometry2, material2);
-// testObject.position.set(0 + sceneShiftX, 0, 0);
-// scene.add(testObject);
-
-// // Test object for LASER LABEL
-// const geometry6 = new THREE.PlaneGeometry(0.01, 0.01);
-// const material6 = new THREE.MeshBasicMaterial({ color: 0x000000, opacity: 0, transparent: true });
-// let testObject22 = new THREE.Mesh(geometry6, material6);
-// testObject22.position.set(0 + sceneShiftX, 0, 0);
-// scene.add(testObject22);
-
-// // Test object for <i LABEL
-// const geometry7 = new THREE.PlaneGeometry(0.1, 0.1);
-// const material7 = new THREE.MeshBasicMaterial({ color: 0x000000, opacity: 0, transparent: true });
-// let testObject23 = new THREE.Mesh(geometry7, material7);
-// testObject23.position.set(0 + sceneShiftX, 0, 0);
-// scene.add(testObject23);
-
-
-// // Test object for <r LABEL
-// const geometry8 = new THREE.PlaneGeometry(0.01, 0.01);
-// const material8 = new THREE.MeshBasicMaterial({ color: 0x000000, opacity: 1, transparent: true });
-// let testObject24 = new THREE.Mesh(geometry8, material8);
-// testObject24.position.set(0 + sceneShiftX, 0, 0);
-// scene.add(testObject24);
-
-
-
-// //Create an initial arc here
-// let arcgeometry = new THREE.TorusGeometry(10, 3, 16, 100);
-// let arcmaterial = new THREE.MeshPhongMaterial({ color: "grey", opacity: 0, transparent: true });
-// let arc = new THREE.Mesh(arcgeometry, arcmaterial);
-// scene.add(arc);
-
-// //Create an initial 2nd arc here
-// let arcgeometry2 = new THREE.TorusGeometry(10, 3, 16, 100);
-// let arcmaterial2 = new THREE.MeshPhongMaterial({ color: "grey", opacity: 0, transparent: true });
-// let arc2 = new THREE.Mesh(arcgeometry2, arcmaterial2);
-// scene.add(arc2);
-
 //-------LASER position wrt slider --------------
 let lateralShift;
 function laserPointer() {
@@ -247,8 +172,8 @@ function laserPointer() {
     plane.rotation.set(0, theta, 0);
     plane_2.rotation.set(0, -theta + Math.PI, 0);
 
-    plane_3.rotation.set(0, theta, 0);
-    plane_4.rotation.set(0, -theta + Math.PI, 0);
+    // plane_3.rotation.set(0, theta, 0);
+    // plane_4.rotation.set(0, -theta + Math.PI, 0);
 
     plane_left.rotation.set(0, theta, 0);
     plane_right.rotation.set(0, -theta + Math.PI, 0);
@@ -264,8 +189,8 @@ function laserPointer() {
     plane.position.set(xLaserStart + sceneShiftX, 0, -zLaserStart);
     plane_2.position.set(xLaserStart + sceneShiftX, 0, +zLaserStart);
 
-    plane_3.position.set(xLaserStart + sceneShiftX, 0, -zLaserStart);
-    plane_4.position.set(xLaserStart + sceneShiftX, 0, +zLaserStart);
+    // plane_3.position.set(xLaserStart + sceneShiftX, 0, -zLaserStart);
+    // plane_4.position.set(xLaserStart + sceneShiftX, 0, +zLaserStart);
 
     plane_left.position.set(xLaserStart + sceneShiftX - 0.1, -0.05, -zLaserStart - 0.01);
     plane_right.position.set(xLaserStart + sceneShiftX - 0.1, -0.05, +zLaserStart + 0.01);

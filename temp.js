@@ -456,7 +456,7 @@ const controls = new OrbitControls(camera, renderer.domElement);
 // controls.maxAzimuthAngle = 2;
 controls.maxPolarAngle = 1.6;
 controls.maxDistance = 8;
-controls.minDistance = 4;
+controls.minDistance = 6;
 // const cameraControls = new CameraControls(camera, renderer.domElement);
 // CameraControls.rotateTo(0, 0, enableTransition);
 renderer.render(scene, camera);

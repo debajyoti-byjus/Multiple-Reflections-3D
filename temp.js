@@ -556,3 +556,14 @@ function sleep(ms) {
  * 5. reflected ray
  * 6. 
  */
+
+ document.getElementById('closeButton').onclick = function(){
+    console.log('close');
+    dsBridge.call("byjus.sendExploreUIEvent", {
+
+        tag: "close",
+
+        data: ""
+
+    });
+}

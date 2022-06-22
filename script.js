@@ -475,7 +475,7 @@ renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 0.4;
 renderer.outputEncoding = THREE.sRGBEncoding;
 document.body.appendChild(canvas);
-renderer.setClearColor("#333333"); // whi/te background - replace ffffff with any hex color
+renderer.setClearColor("#000000"); // whi/te background - replace ffffff with any hex color
 
 // const helper = new THREE.CameraHelper( light.shadow.camera );
 // scene.add( helper );
